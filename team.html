@@ -36,10 +36,24 @@
     <script type="text/javascript" src="https://unpkg.com/snarkdown@1.0.2/dist/snarkdown.umd.js"></script>
     <script src="js/materialize.min.js"></script>
     <script src="js/api.js"></script>
+    <script src="js/idb.js"></script>
+    <script src="js/db.js"></script>
     <script>
     // REQUEST API GET TEAM BY ID
     document.addEventListener("DOMContentLoaded", function() {
-        getTeamById();
+       var item = getTeamById();
+        var save =document.getElementById("save");
+        save.onclick =function(){
+         document.getElementById("save").style.visibility ="hidden";
+         console.log("Tombol FAB di klik.");
+         var toastHTML = `<span>Successfully added team to fav </span>
+         <button onclick="M. Toast.getInstance(this.parentElement).dismiss()"class="btn-flat toast-action">Close</button>
+         `;
+         M.toast({html:toastHTML});
+         item.then(function (team){
+           saveForLater(team);
+         });
+        }
     });
     </script>
   </body>

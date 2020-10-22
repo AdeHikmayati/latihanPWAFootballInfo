@@ -40,9 +40,17 @@ document.addEventListener("DOMContentLoaded", function() {
     
     function loadPage(page) {
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
+      xhttp.onreadystatechange = function () {
+        if (page === "ranking") {
+          getStandings();
+      }
         if (this.readyState == 4) {
-        var content = document.querySelector("#body-content");
+          var content = document.querySelector("#body-content");
+          if (page === "ranking") {
+            getStandings();
+          } else if (page === "favorite") {
+            getSavedTeams();
+          }
         if (this.status == 200) {
             content.innerHTML = xhttp.responseText;
         } else if (this.status == 404) {
